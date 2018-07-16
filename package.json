@@ -1,0 +1,26 @@
+{
+  "name": "string-conversions",
+  "version": "0.0.0",
+  "description": "String conversions functions",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "elm-verify-examples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noredink/string-conversions.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/noredink/string-conversions/issues"
+  },
+  "homepage": "https://github.com/noredink/string-conversions#readme",
+  "dependencies": {
+    "elm": "^0.18.0",
+    "elm-test": "^0.18.9"
+  }
+}
