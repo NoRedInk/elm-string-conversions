@@ -1,7 +1,7 @@
 {
     "version": "4.0.0",
     "summary": "Test Suites",
-    "repository": "https://github.com/noredink/string-conversions.git",
+    "repository": "https://github.com/NoRedInk/string-conversions.git",
     "license": "BSD-3-Clause",
     "source-directories": [
         ".",

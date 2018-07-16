@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/noredink/string-conversions.git"
+    "url": "git+https://github.com/NoRedInk/string-conversions.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/noredink/string-conversions/issues"
+    "url": "https://github.com/NoRedInk/string-conversions/issues"
   },
-  "homepage": "https://github.com/noredink/string-conversions#readme",
+  "homepage": "https://github.com/NoRedInk/string-conversions#readme",
   "dependencies": {
     "elm": "^0.18.0",
     "elm-test": "^0.18.9"

@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "summary": "Helpers to convert common types into a `String`.",
-    "repository": "https://github.com/noredink/string-conversions.git",
+    "repository": "https://github.com/NoRedInk/string-conversions.git",
     "license": "BSD-3-Clause",
     "source-directories": [
         "./src"
