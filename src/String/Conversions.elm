@@ -1,7 +1,6 @@
 module String.Conversions
     exposing
         ( fromBool
-        , fromDay
         , fromDict
         , fromHttpError
         , fromHttpResponse
@@ -14,13 +13,14 @@ module String.Conversions
         , fromTuple2
         , fromTuple3
         , fromValue
+        , fromWeekday
         , withUnionConstructor
         )
 
 {-| Helpers to convert common types into a `String`.
 
 @docs fromBool
-@docs fromDay
+@docs fromWeekday
 @docs fromDict
 @docs fromHttpError
 @docs fromHttpResponse
@@ -37,18 +37,16 @@ module String.Conversions
 
 -}
 
-import Date
 import Dict exposing (Dict)
 import Http
 import Json.Encode as Encode exposing (Value)
 import Set exposing (Set)
+import Time
 
 
 {-| Nest some arguments under a tag, including parentheses when needed. Helpful for printing union type values.
 
-    import String.Extra exposing (fromInt)
-
-    withUnionConstructor "Ok" [ fromInt 1 ]
+    withUnionConstructor "Ok" [ String.fromInt 1 ]
     --> "Ok 1"
 
 -}
@@ -80,9 +78,7 @@ withUnionConstructor tag args =
 {-| Build a record string for debugging and logging with pairs of
 keys and string conversion functions, meant to be paired with accessors
 
-    import String.Extra exposing (fromInt)
-
-    fromRecord [ ("hello", .hello >> fromInt ) ] { hello = 1 }
+    fromRecord [ ("hello", .hello >> String.fromInt ) ] { hello = 1 }
     --> "{ hello = 1 }"
 
 -}
@@ -102,9 +98,7 @@ fromRecord fields record =
 
 {-| Convert a 2-tuple to a string using nested conversions.
 
-    import String.Extra exposing (fromFloat, fromInt)
-
-    fromTuple2 fromInt fromFloat ( 1, 1.5 )
+    fromTuple2 String.fromInt String.fromFloat ( 1, 1.5 )
     --> "(1,1.5)"
 
 -}
@@ -115,9 +109,7 @@ fromTuple2 leftToString rightToString ( a, b ) =
 
 {-| Convert a 3-tuple to a string using nested conversions.
 
-    import String.Extra exposing (fromInt, fromFloat)
-
-    fromTuple3 fromInt fromFloat fromInt ( 1, 1.5, 2 )
+    fromTuple3 String.fromInt String.fromFloat String.fromInt ( 1, 1.5, 2 )
     --> "(1,1.5,2)"
 
 -}
@@ -128,9 +120,7 @@ fromTuple3 firstToString secondToString thirdToString ( a, b, c ) =
 
 {-| Convert a List to a string using a nested conversion.
 
-    import String.Extra exposing (fromInt)
-
-    fromList fromInt [1, 2, 3]
+    fromList String.fromInt [1, 2, 3]
     --> "[1,2,3]"
 
 -}
@@ -148,9 +138,8 @@ fromList innerToString list =
 {-| Convert a Dict to a String using nested conversions.
 
     import Dict
-    import String.Extra exposing (fromFloat, fromInt)
 
-    fromDict fromInt fromFloat (Dict.fromList [(1, 1.5)])
+    fromDict String.fromInt String.fromFloat (Dict.fromList [(1, 1.5)])
     --> "Dict.fromList [(1,1.5)]"
 
 -}
@@ -168,9 +157,8 @@ fromDict keyToString valueToString dict =
 {-| Convert a Set to a string using a nested conversion.
 
     import Set
-    import String.Extra exposing (fromInt)
 
-    fromSet fromInt (Set.fromList [1, 2])
+    fromSet String.fromInt (Set.fromList [1, 2])
     --> "Set.fromList [1,2]"
 
 -}
@@ -226,7 +214,7 @@ fromHttpResponse =
         , ( "status"
           , .status
                 >> fromRecord
-                    [ ( "code", .code >> toString ) -- TODO String.fromInt
+                    [ ( "code", .code >> String.fromInt ) -- TODO String.fromInt
                     , ( "message", .message >> fromString )
                     ]
           )
@@ -235,80 +223,78 @@ fromHttpResponse =
         ]
 
 
-{-| Convert a Date.Month to a String matching its constructor.
+{-| Convert a Time.Month to a String matching its constructor.
 -}
-fromMonth : Date.Month -> String
+fromMonth : Time.Month -> String
 fromMonth month =
     case month of
-        Date.Jan ->
+        Time.Jan ->
             "Jan"
 
-        Date.Feb ->
+        Time.Feb ->
             "Feb"
 
-        Date.Mar ->
+        Time.Mar ->
             "Mar"
 
-        Date.Apr ->
+        Time.Apr ->
             "Apr"
 
-        Date.May ->
+        Time.May ->
             "May"
 
-        Date.Jun ->
+        Time.Jun ->
             "Jun"
 
-        Date.Jul ->
+        Time.Jul ->
             "Jul"
 
-        Date.Aug ->
+        Time.Aug ->
             "Aug"
 
-        Date.Sep ->
+        Time.Sep ->
             "Sep"
 
-        Date.Oct ->
+        Time.Oct ->
             "Oct"
 
-        Date.Nov ->
+        Time.Nov ->
             "Nov"
 
-        Date.Dec ->
+        Time.Dec ->
             "Dec"
 
 
-{-| Convert a Date.Day to a String matching its constructor.
+{-| Convert a Time.Weekday to a String matching its constructor.
 -}
-fromDay : Date.Day -> String
-fromDay day =
+fromWeekday : Time.Weekday -> String
+fromWeekday day =
     case day of
-        Date.Mon ->
+        Time.Mon ->
             "Mon"
 
-        Date.Tue ->
+        Time.Tue ->
             "Tue"
 
-        Date.Wed ->
+        Time.Wed ->
             "Wed"
 
-        Date.Thu ->
+        Time.Thu ->
             "Thu"
 
-        Date.Fri ->
+        Time.Fri ->
             "Fri"
 
-        Date.Sat ->
+        Time.Sat ->
             "Sat"
 
-        Date.Sun ->
+        Time.Sun ->
             "Sun"
 
 
 {-| Convert a Maybe to a String using a nested conversion.
 
-    import String.Extra exposing (fromInt)
-
-    fromMaybe fromInt (Just 1)
+    fromMaybe String.fromInt (Just 1)
     --> "Just 1"
 
 -}
