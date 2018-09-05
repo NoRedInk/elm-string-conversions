@@ -1,6 +1,8 @@
 # string-conversions
 
-String conversion functions for Elm.
+String conversion functions for Elm. Includes functions for basic types like
+`String` and `Bool` as well as complex ones like `Http.Error` and functions for
+building up string representations of custom types and records.
 
 ## Testing
 
