@@ -1,21 +1,20 @@
-module String.Conversions
-    exposing
-        ( fromBool
-        , fromDict
-        , fromHttpError
-        , fromHttpResponse
-        , fromList
-        , fromMaybe
-        , fromMonth
-        , fromRecord
-        , fromSet
-        , fromString
-        , fromTuple2
-        , fromTuple3
-        , fromValue
-        , fromWeekday
-        , withUnionConstructor
-        )
+module String.Conversions exposing
+    ( fromBool
+    , fromWeekday
+    , fromDict
+    , fromHttpError
+    , fromHttpResponse
+    , fromList
+    , fromMaybe
+    , fromMonth
+    , fromRecord
+    , fromSet
+    , fromString
+    , fromTuple2
+    , fromTuple3
+    , fromValue
+    , withUnionConstructor
+    )
 
 {-| Helpers to convert common types into a `String`.
 
@@ -67,6 +66,7 @@ withUnionConstructor tag args =
                     (\arg ->
                         if needsParens arg then
                             "(" ++ arg ++ ")"
+
                         else
                             arg
                     )
@@ -198,28 +198,41 @@ fromHttpError error =
         Http.NetworkError ->
             withUnionConstructor "NetworkError" []
 
-        Http.BadStatus response ->
-            withUnionConstructor "BadStatus" [ fromHttpResponse response ]
+        Http.BadStatus statusCode ->
+            withUnionConstructor "BadStatus" [ String.fromInt statusCode ]
 
-        Http.BadPayload message response ->
-            withUnionConstructor "BadPayload " [ fromString message, fromHttpResponse response ]
+        Http.BadBody body ->
+            withUnionConstructor "BadBody" [ fromString body ]
 
 
 {-| Convert an Http.Response String to a String.
 -}
 fromHttpResponse : Http.Response String -> String
-fromHttpResponse =
+fromHttpResponse response =
+    case response of
+        Http.BadUrl_ url ->
+            withUnionConstructor "BadUrl_" [ fromString url ]
+
+        Http.Timeout_ ->
+            withUnionConstructor "Timeout_" []
+
+        Http.NetworkError_ ->
+            withUnionConstructor "NetworkError_" []
+
+        Http.BadStatus_ metadata body ->
+            withUnionConstructor "BadStatus_" [ fromMetadata metadata, fromString body ]
+
+        Http.GoodStatus_ metadata body ->
+            withUnionConstructor "GoodStatus_" [ fromMetadata metadata, fromString body ]
+
+
+fromMetadata : Http.Metadata -> String
+fromMetadata =
     fromRecord
         [ ( "url", .url >> fromString )
-        , ( "status"
-          , .status
-                >> fromRecord
-                    [ ( "code", .code >> String.fromInt ) -- TODO String.fromInt
-                    , ( "message", .message >> fromString )
-                    ]
-          )
+        , ( "statusCode", .statusCode >> String.fromInt )
+        , ( "statusText", .statusText >> fromString )
         , ( "headers", .headers >> fromDict fromString fromString )
-        , ( "body", .body >> fromString )
         ]
 
 
@@ -314,6 +327,7 @@ fromBool : Bool -> String
 fromBool bool =
     if bool then
         "True"
+
     else
         "False"
 
