@@ -1,0 +1,22 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.3
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:hoek:20180212':
+    - elm-test > binstall > request > hawk > hoek:
+        patched: '2018-12-20T15:38:35.906Z'
+    - elm-test > binstall > request > hawk > sntp > hoek:
+        patched: '2018-12-20T15:38:35.906Z'
+    - elm-verify-examples > elm-test > binstall > request > hawk > hoek:
+        patched: '2018-12-20T15:38:35.906Z'
+    - elm-test > binstall > request > hawk > boom > hoek:
+        patched: '2018-12-20T15:38:35.906Z'
+    - elm-test > binstall > request > hawk > cryptiles > boom > hoek:
+        patched: '2018-12-20T15:38:35.906Z'
+    - elm-verify-examples > elm-test > binstall > request > hawk > boom > hoek:
+        patched: '2018-12-20T15:38:35.906Z'
+    - elm-verify-examples > elm-test > binstall > request > hawk > sntp > hoek:
+        patched: '2018-12-20T15:38:35.906Z'
+    - elm-verify-examples > elm-test > binstall > request > hawk > cryptiles > boom > hoek:
+        patched: '2018-12-20T15:38:35.906Z'
