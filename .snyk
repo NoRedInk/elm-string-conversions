@@ -1,0 +1,18 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-450202:
+    - elm-test > lodash:
+        patched: '2019-09-13T01:55:09.838Z'
+    - elm-test > node-elm-compiler > lodash:
+        patched: '2019-09-13T01:55:09.838Z'
+    - elm-verify-examples > elm-test > lodash:
+        patched: '2019-09-13T01:55:09.838Z'
+    - elm-test > node-elm-compiler > find-elm-dependencies > lodash:
+        patched: '2019-09-13T01:55:09.838Z'
+    - elm-verify-examples > elm-test > node-elm-compiler > lodash:
+        patched: '2019-09-13T01:55:09.838Z'
+    - elm-verify-examples > elm-test > node-elm-compiler > find-elm-dependencies > lodash:
+        patched: '2019-09-13T01:55:09.838Z'
