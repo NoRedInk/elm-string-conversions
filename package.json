@@ -7,7 +7,9 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "elm-verify-examples"
+    "test": "elm-verify-examples",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -21,7 +23,9 @@
   "homepage": "https://github.com/NoRedInk/string-conversions#readme",
   "dependencies": {
     "elm": "0.19.0-no-deps",
-    "elm-test": "0.19.0-rev6",
-    "elm-verify-examples": "4.0.0"
-  }
+    "elm-test": "0.19.1",
+    "elm-verify-examples": "4.0.1",
+    "snyk": "^1.236.1"
+  },
+  "snyk": true
 }
