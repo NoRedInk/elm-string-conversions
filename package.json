@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "elm-verify-examples"
+    "test": "elm-verify-examples --run-tests"
   },
   "repository": {
     "type": "git",
