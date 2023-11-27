@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/NoRedInk/string-conversions#readme",
   "dependencies": {
-    "elm": "0.19.1",
+    "elm": "1.2.0",
     "elm-test": "0.19.1",
     "elm-verify-examples": "5.0.0",
     "snyk": "^1.996.0"
