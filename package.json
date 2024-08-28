@@ -24,7 +24,7 @@
   "dependencies": {
     "elm": "0.19.1",
     "elm-test": "0.19.1",
-    "elm-verify-examples": "5.0.0",
+    "elm-verify-examples": "6.0.1",
     "snyk": "^1.996.0"
   },
   "snyk": true
